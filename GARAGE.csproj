@@ -8,9 +8,10 @@
     <OutputType>WinExe</OutputType>
     <RootNamespace>GARAGE</RootNamespace>
     <AssemblyName>GARAGE</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -21,6 +22,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -30,8 +32,13 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="MySql.Data, Version=8.0.18.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL" />
+    <Reference Include="MySql.Data.EntityFramework, Version=8.0.18.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL" />
+    <Reference Include="MySQL.Data.EntityFrameworkCore, Version=8.0.18.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL" />
+    <Reference Include="MySQL.Data.EntityFrameworkCore.Design, Version=8.0.18.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -44,14 +51,85 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Form1.cs">
+    <Compile Include="AdministrationScreen.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="AdministrationScreen.Designer.cs">
+      <DependentUpon>AdministrationScreen.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AuthScreen.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AuthScreen.Designer.cs">
+      <DependentUpon>AuthScreen.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ClientEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ClientEdit.Designer.cs">
+      <DependentUpon>ClientEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ClientsScreen.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ClientsScreen.Designer.cs">
+      <DependentUpon>ClientsScreen.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Config.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Config.Designer.cs">
+      <DependentUpon>Config.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GarageDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GarageDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="MainScreen.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainScreen.Designer.cs">
+      <DependentUpon>MainScreen.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MasterEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MasterEdit.Designer.cs">
+      <DependentUpon>MasterEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MastersScreen.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MastersScreen.Designer.cs">
+      <DependentUpon>MastersScreen.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="AdministrationScreen.resx">
+      <DependentUpon>AdministrationScreen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AuthScreen.resx">
+      <DependentUpon>AuthScreen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ClientEdit.resx">
+      <DependentUpon>ClientEdit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ClientsScreen.resx">
+      <DependentUpon>ClientsScreen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Config.resx">
+      <DependentUpon>Config.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainScreen.resx">
+      <DependentUpon>MainScreen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MasterEdit.resx">
+      <DependentUpon>MasterEdit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MastersScreen.resx">
+      <DependentUpon>MastersScreen.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -60,7 +138,20 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
+    <None Include="app.config" />
+    <None Include="GarageDataSet.xsc">
+      <DependentUpon>GarageDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="GarageDataSet.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>GarageDataSet.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="GarageDataSet.xss">
+      <DependentUpon>GarageDataSet.xsd</DependentUpon>
+    </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -70,6 +161,9 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
