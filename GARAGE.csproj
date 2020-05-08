@@ -81,10 +81,19 @@
     <Compile Include="Config.Designer.cs">
       <DependentUpon>Config.cs</DependentUpon>
     </Compile>
+    <Compile Include="GarageDataSet.cs">
+      <DependentUpon>GarageDataSet.xsd</DependentUpon>
+    </Compile>
     <Compile Include="GarageDataSet.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>GarageDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="GlassEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GlassEdit.Designer.cs">
+      <DependentUpon>GlassEdit.cs</DependentUpon>
     </Compile>
     <Compile Include="MainScreen.cs">
       <SubType>Form</SubType>
@@ -120,6 +129,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Config.resx">
       <DependentUpon>Config.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GlassEdit.resx">
+      <DependentUpon>GlassEdit.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainScreen.resx">
       <DependentUpon>MainScreen.cs</DependentUpon>

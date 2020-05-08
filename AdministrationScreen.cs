@@ -32,5 +32,10 @@ namespace GARAGE
             ClientsScreen FormClientsScreen = new ClientsScreen();
             FormClientsScreen.ShowDialog(this);
         }
+
+        private void Glass_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
