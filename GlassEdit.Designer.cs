@@ -33,8 +33,8 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.Phone = new System.Windows.Forms.TextBox();
             this.Provider = new System.Windows.Forms.TextBox();
+            this.Name = new System.Windows.Forms.TextBox();
             this.Eurocode = new System.Windows.Forms.TextBox();
             this.Price = new System.Windows.Forms.NumericUpDown();
             ((System.ComponentModel.ISupportInitialize)(this.Price)).BeginInit();
@@ -48,24 +48,25 @@
             this.OK.TabIndex = 27;
             this.OK.Text = "Сохранить";
             this.OK.UseVisualStyleBackColor = true;
+            this.OK.Click += new System.EventHandler(this.OK_Click);
             // 
             // label4
             // 
             this.label4.AutoSize = true;
             this.label4.Location = new System.Drawing.Point(18, 97);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(52, 13);
+            this.label4.Size = new System.Drawing.Size(65, 13);
             this.label4.TabIndex = 26;
-            this.label4.Text = "Телефон";
+            this.label4.Text = "Поставщик";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(18, 71);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(65, 13);
+            this.label3.Size = new System.Drawing.Size(83, 13);
             this.label3.TabIndex = 25;
-            this.label3.Text = "Поставщик";
+            this.label3.Text = "Наименование";
             // 
             // label2
             // 
@@ -85,21 +86,21 @@
             this.label1.TabIndex = 23;
             this.label1.Text = "Еврокод";
             // 
-            // Phone
-            // 
-            this.Phone.Location = new System.Drawing.Point(127, 94);
-            this.Phone.MaxLength = 100;
-            this.Phone.Name = "Phone";
-            this.Phone.Size = new System.Drawing.Size(192, 20);
-            this.Phone.TabIndex = 22;
-            // 
             // Provider
             // 
-            this.Provider.Location = new System.Drawing.Point(127, 68);
+            this.Provider.Location = new System.Drawing.Point(127, 94);
             this.Provider.MaxLength = 100;
             this.Provider.Name = "Provider";
             this.Provider.Size = new System.Drawing.Size(192, 20);
-            this.Provider.TabIndex = 21;
+            this.Provider.TabIndex = 22;
+            // 
+            // Name
+            // 
+            this.Name.Location = new System.Drawing.Point(127, 68);
+            this.Name.MaxLength = 200;
+            this.Name.Name = "Name";
+            this.Name.Size = new System.Drawing.Size(192, 20);
+            this.Name.TabIndex = 21;
             // 
             // Eurocode
             // 
@@ -112,6 +113,11 @@
             // Price
             // 
             this.Price.Location = new System.Drawing.Point(127, 43);
+            this.Price.Maximum = new decimal(new int[] {
+            1215752191,
+            23,
+            0,
+            0});
             this.Price.Name = "Price";
             this.Price.Size = new System.Drawing.Size(120, 20);
             this.Price.TabIndex = 28;
@@ -127,12 +133,12 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.Phone);
             this.Controls.Add(this.Provider);
+            this.Controls.Add(this.Name);
             this.Controls.Add(this.Eurocode);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Name = "GlassEdit";
             this.Text = "Редактирование запчастей";
+            this.Load += new System.EventHandler(this.GlassEdit_Load);
             ((System.ComponentModel.ISupportInitialize)(this.Price)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -146,8 +152,8 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox Phone;
         private System.Windows.Forms.TextBox Provider;
+        private System.Windows.Forms.TextBox Name;
         private System.Windows.Forms.TextBox Eurocode;
         private System.Windows.Forms.NumericUpDown Price;
     }

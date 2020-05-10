@@ -95,6 +95,12 @@
     <Compile Include="GlassEdit.Designer.cs">
       <DependentUpon>GlassEdit.cs</DependentUpon>
     </Compile>
+    <Compile Include="GlassScreen.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GlassScreen.Designer.cs">
+      <DependentUpon>GlassScreen.cs</DependentUpon>
+    </Compile>
     <Compile Include="MainScreen.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -132,6 +138,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="GlassEdit.resx">
       <DependentUpon>GlassEdit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GlassScreen.resx">
+      <DependentUpon>GlassScreen.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainScreen.resx">
       <DependentUpon>MainScreen.cs</DependentUpon>
