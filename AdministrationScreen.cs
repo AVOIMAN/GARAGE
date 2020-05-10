@@ -38,5 +38,11 @@ namespace GARAGE
             GlassScreen FormGlassScreeen = new GlassScreen();
             FormGlassScreeen.ShowDialog(this);
         }
+
+        private void Service_Click(object sender, EventArgs e)
+        {
+            ServiceScreen FormServiceScreeen = new ServiceScreen();
+            FormServiceScreeen.ShowDialog(this);
+        }
     }
 }

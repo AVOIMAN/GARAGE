@@ -84,6 +84,7 @@
             this.Service.TabIndex = 4;
             this.Service.Text = "Работы";
             this.Service.UseVisualStyleBackColor = true;
+            this.Service.Click += new System.EventHandler(this.Service_Click);
             // 
             // Car
             // 
