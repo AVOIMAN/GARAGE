@@ -94,6 +94,7 @@
             this.Car.TabIndex = 5;
             this.Car.Text = "Автомобили";
             this.Car.UseVisualStyleBackColor = true;
+            this.Car.Click += new System.EventHandler(this.Car_Click);
             // 
             // AdministrationScreen
             // 

@@ -44,5 +44,11 @@ namespace GARAGE
             ServiceScreen FormServiceScreeen = new ServiceScreen();
             FormServiceScreeen.ShowDialog(this);
         }
+
+        private void Car_Click(object sender, EventArgs e)
+        {
+            CarScreen FormCarScreen = new CarScreen();
+            FormCarScreen.ShowDialog(this);
+        }
     }
 }
