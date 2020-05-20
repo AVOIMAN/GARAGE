@@ -15,9 +15,9 @@ namespace GARAGE
 {
     public partial class MasterEdit : Form
     {
-        private Int16 Id_master; // Id Мастера
+        private Int32 Id_master; // Id Мастера
 
-        public MasterEdit(Int16 ID)
+        public MasterEdit(Int32 ID)
         {
             InitializeComponent();
 
@@ -67,26 +67,24 @@ namespace GARAGE
         private void OK_Click(object sender, EventArgs e)
         {
             MySqlCommand _MySqlSelectCommand;
-            MySqlDataReader _Reader;
 
             _MySqlSelectCommand = new MySqlCommand();
             _MySqlSelectCommand.Connection = Gar.MySqlCon;
 
-            int NN;
 
             if (this.Id_master == 0)
             {
                 // получим очередной номер
-                _MySqlSelectCommand.CommandText = "SELECT IFNULL(MAX(Id_staff),0) FROM staff";
-                _Reader = _MySqlSelectCommand.ExecuteReader();
-                _Reader.Read();
-                NN = _Reader.GetInt32(0) + 1;
-                this.Id_master = (short)NN;
-                _Reader.Close();
+                this.Id_master = Gar.GetNN("staff");
+                _MySqlSelectCommand.CommandText = "REPLACE INTO staff SET Id_staff = @ID, Name = @NAME, Login = @LOGIN, Phone = @PHONE, Password = @PAW, Type = @TYPE";
+
+            }
+            else
+            {
+                _MySqlSelectCommand.CommandText = "UPDATE staff SET Name = @NAME, Login = @LOGIN, Phone = @PHONE, Password = @PAW, Type = @TYPE WHERE Id_staff = @ID";
 
             }
 
-            _MySqlSelectCommand.CommandText = "REPLACE INTO staff SET Id_staff = @ID, Name = @NAME, Login = @LOGIN, Phone = @PHONE, Password = @PAW, Type = @TYPE";
             _MySqlSelectCommand.Parameters.AddWithValue("@ID", this.Id_master);
             _MySqlSelectCommand.Parameters.AddWithValue("@NAME", this.Name.Text);
             _MySqlSelectCommand.Parameters.AddWithValue("@LOGIN", this.Login.Text);

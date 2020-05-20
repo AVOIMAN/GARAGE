@@ -14,9 +14,9 @@ namespace GARAGE
 {
     public partial class CarEdit : Form
     {
-        private Int16 Id_car; // Id машины
+        private Int32 Id_car; // Id машины
 
-        public CarEdit(Int16 ID)
+        public CarEdit(Int32 ID)
         {
             InitializeComponent();
             Id_car = ID;
@@ -47,7 +47,7 @@ namespace GARAGE
                     this.Brand.Text = _Reader.GetString(0);
                     this.Model.Text = _Reader.GetString(1);
                     this.Gov_numb.Text = _Reader.GetString(2);
-                    this.Customer.SelectedValue = _Reader.GetInt16(3);
+                    this.Customer.SelectedValue = _Reader.GetInt32(3);
 
                 }
                 _Reader.Close();
@@ -58,26 +58,23 @@ namespace GARAGE
         private void OK_Click(object sender, EventArgs e)
         {
             MySqlCommand _MySqlSelectCommand;
-            MySqlDataReader _Reader;
 
             _MySqlSelectCommand = new MySqlCommand();
             _MySqlSelectCommand.Connection = Gar.MySqlCon;
 
-            int NN;
-
             if (this.Id_car == 0)
             {
                 // получим очередной номер
-                _MySqlSelectCommand.CommandText = "SELECT IFNULL(MAX(Id_car),0) FROM car";
-                _Reader = _MySqlSelectCommand.ExecuteReader();
-                _Reader.Read();
-                NN = _Reader.GetInt32(0) + 1;
-                this.Id_car = (short)NN;
-                _Reader.Close();
+                this.Id_car = Gar.GetNN("car");
+                _MySqlSelectCommand.CommandText = "REPLACE INTO car SET Id_car = @ID, Brand = @BRAND, Model = @MODEL, Gov_numb = @GOV, Id_customer = @CUSTOMER";
+
+            }
+            else
+            {
+                _MySqlSelectCommand.CommandText = "UPDATE car SET Brand = @BRAND, Model = @MODEL, Gov_numb = @GOV, Id_customer = @CUSTOMER WHERE Id_car = @ID";
 
             }
 
-            _MySqlSelectCommand.CommandText = "REPLACE INTO car SET Id_car = @ID, Brand = @BRAND, Model = @MODEL, Gov_numb = @GOV, Id_customer = @CUSTOMER";
             _MySqlSelectCommand.Parameters.AddWithValue("@ID", this.Id_car);
             _MySqlSelectCommand.Parameters.AddWithValue("@BRAND", this.Brand.Text);
             _MySqlSelectCommand.Parameters.AddWithValue("@MODEL", this.Model.Text);

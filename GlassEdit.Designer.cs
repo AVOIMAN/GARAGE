@@ -112,6 +112,12 @@
             // 
             // Price
             // 
+            this.Price.DecimalPlaces = 2;
+            this.Price.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            131072});
             this.Price.Location = new System.Drawing.Point(127, 43);
             this.Price.Maximum = new decimal(new int[] {
             1215752191,

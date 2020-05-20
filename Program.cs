@@ -26,6 +26,8 @@ namespace GARAGE
         public static MySqlConnection MySqlCon;
         public static Boolean Gar_Exit;
         public static string Staff_Type; // тип сотрудника 0 - рабочий, 1 - админ
+        public static ArrayList StatusOrderList = new ArrayList();   //статус заказа
+        public static string StatusOrderFirst = "B"; // начальный статус заказа
 
         public static bool DBConnectionStatus()
         {
@@ -60,6 +62,61 @@ namespace GARAGE
                 return false;
             }
         }
+
+        // Получение очередного номера
+        public static Int32 GetNN(string Table)
+        {
+            MySqlCommand _MySqlSelectCommand;
+            MySqlDataReader _Reader;
+
+            Int32 NextNN;
+            Int32 CheckNN;
+            int rowEffected;
+            int NN;
+
+            _MySqlSelectCommand = new MySqlCommand();
+            _MySqlSelectCommand.Connection = Gar.MySqlCon;
+
+            _MySqlSelectCommand.CommandText = "SET autocommit = 0";
+            rowEffected = _MySqlSelectCommand.ExecuteNonQuery();
+
+            _MySqlSelectCommand.CommandText = "SELECT Id FROM NN WHERE Tables = @TB FOR UPDATE";
+            _MySqlSelectCommand.Parameters.AddWithValue("@TB", Table);
+
+            _Reader = _MySqlSelectCommand.ExecuteReader();
+            _Reader.Read();
+            if (_Reader.HasRows)
+            {
+                CheckNN = _Reader.GetInt32(0);
+            }
+            else
+            {
+                CheckNN = 0;
+            }
+            _Reader.Close();
+            _MySqlSelectCommand.Parameters.Clear();
+
+
+
+            NN = CheckNN + 1;
+            NextNN = NN;
+
+            _MySqlSelectCommand.CommandText = "REPLACE INTO NN SET Id = @ID, Tables = @TABL";
+            _MySqlSelectCommand.Parameters.AddWithValue("@ID", NextNN);
+            _MySqlSelectCommand.Parameters.AddWithValue("@TABL", Table);
+
+            rowEffected = _MySqlSelectCommand.ExecuteNonQuery();
+
+            _MySqlSelectCommand.Parameters.Clear();
+            _MySqlSelectCommand.CommandText = "COMMIT";
+            rowEffected = _MySqlSelectCommand.ExecuteNonQuery();
+
+            _MySqlSelectCommand.CommandText = "SET autocommit = 1";
+            rowEffected = _MySqlSelectCommand.ExecuteNonQuery();
+
+            return NextNN;
+        }
+
     }
 
     //структура для хранения сохраняемой в файл инфы
@@ -91,6 +148,38 @@ namespace GARAGE
             mySet.Close();
         }
 
+
+    }
+
+    public class UDCS
+    {
+        // Для формирования массива по UDC
+        private string myKY;
+        private string myDL;
+
+        public UDCS(string strKY, string strDL)
+        {
+
+            this.myKY = strKY;
+            this.myDL = strDL;
+        }
+
+        public string KY
+        {
+            get
+            {
+                return myKY;
+            }
+        }
+
+        public string DL
+        {
+
+            get
+            {
+                return myDL;
+            }
+        }
 
     }
 
@@ -173,6 +262,14 @@ namespace GARAGE
             FormAuth.ShowDialog();
 
             if (!Gar.Gar_Exit)
+
+                //Заполним классификатор статусов заказа
+                Gar.StatusOrderList.Add(new UDCS("B", "Черновик"));
+                Gar.StatusOrderList.Add(new UDCS("W", "В работе"));
+                Gar.StatusOrderList.Add(new UDCS("D", "Выполнен"));
+                Gar.StatusOrderList.Add(new UDCS("C", "Отменен"));
+
+
 
             Application.Run(new MainScreen());
         }

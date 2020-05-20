@@ -28,5 +28,11 @@ namespace GARAGE
             FormAdministration.ShowDialog(this);
 
         }
+
+        private void Work_Click(object sender, EventArgs e)
+        {
+            OrderScreen FormOrderScreen = new OrderScreen();
+            FormOrderScreen.ShowDialog(this);
+        }
     }
 }

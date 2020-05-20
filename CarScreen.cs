@@ -36,7 +36,7 @@ namespace GARAGE
 
         private void DelCar_Click(object sender, EventArgs e)
         {
-            Int16 tekID;
+            Int32 tekID;
 
             if ((this.CarBindingSource.Count > 0) && (this.dataGridView1.CurrentRow != null))
             {
@@ -45,7 +45,7 @@ namespace GARAGE
                 if (MessageBox.Show(this, "Удаляем автомобиль?", "Подтверждение операции", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == System.Windows.Forms.DialogResult.Yes)
                 {
 
-                    tekID = Convert.ToInt16(this.dataGridView1.CurrentRow.Cells["idcarDataGridViewTextBoxColumn"].Value.ToString());
+                    tekID = Convert.ToInt32(this.dataGridView1.CurrentRow.Cells["idcarDataGridViewTextBoxColumn"].Value.ToString());
                     if (this.dataGridView1.CurrentRow.IsNewRow == false)
                     {
                         MySqlCommand _MySqlSelectCommand;
@@ -69,19 +69,20 @@ namespace GARAGE
 
         private void dataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            Int16 tekID;
-
+            Int32 tekID;
+            
             if (e.RowIndex >= 0)
             {
                 if (this.dataGridView1.Rows[e.RowIndex].IsNewRow == false)
                 {
 
-                    tekID = Convert.ToInt16(this.dataGridView1.Rows[e.RowIndex].Cells["idcarDataGridViewTextBoxColumn"].Value.ToString());
+                    tekID = Convert.ToInt32(this.dataGridView1.Rows[e.RowIndex].Cells["idcarDataGridViewTextBoxColumn"].Value.ToString());
 
                     CarEdit FormCarEdit = new CarEdit(tekID);
                     FormCarEdit.ShowDialog(this);
 
                     this.vcarTableAdapter.Fill(this.garageDataSet.vcar);
+                    dataGridView1.CurrentCell = dataGridView1.Rows[e.RowIndex].Cells[0];
                 }
 
             }

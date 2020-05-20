@@ -14,9 +14,9 @@ namespace GARAGE
 {
     public partial class GlassEdit : Form
     {
-        private Int16 Id_glass; // Id детали
+        private Int32 Id_glass; // Id детали
 
-        public GlassEdit(Int16 ID)
+        public GlassEdit(Int32 ID)
         {
             InitializeComponent();
 
@@ -26,26 +26,24 @@ namespace GARAGE
         private void OK_Click(object sender, EventArgs e)
         {
             MySqlCommand _MySqlSelectCommand;
-            MySqlDataReader _Reader;
 
             _MySqlSelectCommand = new MySqlCommand();
             _MySqlSelectCommand.Connection = Gar.MySqlCon;
 
-            int NN;
 
             if (this.Id_glass == 0)
             {
                 // получим очередной номер
-                _MySqlSelectCommand.CommandText = "SELECT IFNULL(MAX(Id_glass),0) FROM glass";
-                _Reader = _MySqlSelectCommand.ExecuteReader();
-                _Reader.Read();
-                NN = _Reader.GetInt32(0) + 1;
-                this.Id_glass = (short)NN;
-                _Reader.Close();
+                this.Id_glass = Gar.GetNN("glass");
+                _MySqlSelectCommand.CommandText = "REPLACE INTO glass SET Id_glass = @ID, Name = @NAME, Price = @PRICE, Provider = @PROVIDER, Eurocode = @CODE";
+
+            }
+            else
+            {
+                _MySqlSelectCommand.CommandText = "UPDATE glass SET Name = @NAME, Price = @PRICE, Provider = @PROVIDER, Eurocode = @CODE WHERE Id_glass = @ID";
 
             }
 
-            _MySqlSelectCommand.CommandText = "REPLACE INTO glass SET Id_glass = @ID, Name = @NAME, Price = @PRICE, Provider = @PROVIDER, Eurocode = @CODE";
             _MySqlSelectCommand.Parameters.AddWithValue("@ID", this.Id_glass);
             _MySqlSelectCommand.Parameters.AddWithValue("@NAME", this.Name.Text);
             _MySqlSelectCommand.Parameters.AddWithValue("@PRICE", this.Price.Value);
@@ -76,7 +74,7 @@ namespace GARAGE
                 if (_Reader.HasRows)
                 {
                     this.Name.Text = _Reader.GetString(0);
-                    this.Price.Value = _Reader.GetInt16(1);
+                    this.Price.Value = _Reader.GetDecimal(1);
                     this.Eurocode.Text = _Reader.GetString(2);
                     this.Provider.Text = _Reader.GetString(3);
                     

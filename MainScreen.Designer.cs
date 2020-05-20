@@ -50,6 +50,7 @@
             this.Work.TabIndex = 1;
             this.Work.Text = "Автомобили на ремонте";
             this.Work.UseVisualStyleBackColor = true;
+            this.Work.Click += new System.EventHandler(this.Work_Click);
             // 
             // MainScreen
             // 

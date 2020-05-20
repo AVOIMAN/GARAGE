@@ -14,9 +14,9 @@ namespace GARAGE
 {
     public partial class ClientEdit : Form
     {
-        private Int16 Id_client; // Id клиента
+        private Int32 Id_client; // Id клиента
 
-        public ClientEdit(Int16 ID)
+        public ClientEdit(Int32 ID)
         {
             InitializeComponent();
 
@@ -26,26 +26,24 @@ namespace GARAGE
         private void OK_Click(object sender, EventArgs e)
         {
             MySqlCommand _MySqlSelectCommand;
-            MySqlDataReader _Reader;
 
             _MySqlSelectCommand = new MySqlCommand();
             _MySqlSelectCommand.Connection = Gar.MySqlCon;
 
-            int NN;
 
             if (this.Id_client == 0)
             {
                 // получим очередной номер
-                _MySqlSelectCommand.CommandText = "SELECT IFNULL(MAX(Id_customer),0) FROM customer";
-                _Reader = _MySqlSelectCommand.ExecuteReader();
-                _Reader.Read();
-                NN = _Reader.GetInt32(0) + 1;
-                this.Id_client = (short)NN;
-                _Reader.Close();
+                this.Id_client = Gar.GetNN("customer");
+                _MySqlSelectCommand.CommandText = "REPLACE INTO customer SET Id_customer = @ID, name = @NAME, lastname = @LNAME, middlename = @MNAME, phone = @PHONE";
+
+            }
+            else
+            {
+                _MySqlSelectCommand.CommandText = "UPDATE customer SET name = @NAME, lastname = @LNAME, middlename = @MNAME, phone = @PHONE WHERE Id_customer = @ID";
 
             }
 
-            _MySqlSelectCommand.CommandText = "REPLACE INTO customer SET Id_customer = @ID, name = @NAME, lastname = @LNAME, middlename = @MNAME, phone = @PHONE";
             _MySqlSelectCommand.Parameters.AddWithValue("@ID", this.Id_client);
             _MySqlSelectCommand.Parameters.AddWithValue("@NAME", this.Name.Text);
             _MySqlSelectCommand.Parameters.AddWithValue("@LNAME", this.LastName.Text);

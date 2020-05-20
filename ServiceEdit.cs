@@ -14,9 +14,9 @@ namespace GARAGE
 {
     public partial class ServiceEdit : Form
     {
-        private Int16 Id_service; // Id работы
+        private Int32 Id_service; // Id работы
 
-        public ServiceEdit(Int16 ID)
+        public ServiceEdit(Int32 ID)
         {
             InitializeComponent();
             Id_service = ID;
@@ -25,26 +25,23 @@ namespace GARAGE
         private void OK_Click(object sender, EventArgs e)
         {
             MySqlCommand _MySqlSelectCommand;
-            MySqlDataReader _Reader;
 
             _MySqlSelectCommand = new MySqlCommand();
             _MySqlSelectCommand.Connection = Gar.MySqlCon;
 
-            int NN;
-
             if (this.Id_service == 0)
             {
                 // получим очередной номер
-                _MySqlSelectCommand.CommandText = "SELECT IFNULL(MAX(Id_service),0) FROM service";
-                _Reader = _MySqlSelectCommand.ExecuteReader();
-                _Reader.Read();
-                NN = _Reader.GetInt32(0) + 1;
-                this.Id_service = (short)NN;
-                _Reader.Close();
+                this.Id_service = Gar.GetNN("service");
+                _MySqlSelectCommand.CommandText = "REPLACE INTO service SET Id_service = @ID, Name = @NAME, Price = @PRICE";
+
+            }
+            else
+            {
+                _MySqlSelectCommand.CommandText = "UPDATE service SET Name = @NAME, Price = @PRICE WHERE Id_service = @ID";
 
             }
 
-            _MySqlSelectCommand.CommandText = "REPLACE INTO service SET Id_service = @ID, Name = @NAME, Price = @PRICE";
             _MySqlSelectCommand.Parameters.AddWithValue("@ID", this.Id_service);
             _MySqlSelectCommand.Parameters.AddWithValue("@PRICE", this.Price.Value);
             _MySqlSelectCommand.Parameters.AddWithValue("@NAME", this.Name.Text);
@@ -73,7 +70,7 @@ namespace GARAGE
                 if (_Reader.HasRows)
                 {
                     this.Name.Text = _Reader.GetString(0);
-                    this.Price.Value = _Reader.GetInt16(1);
+                    this.Price.Value = _Reader.GetDecimal(1);
 
                 }
                 _Reader.Close();

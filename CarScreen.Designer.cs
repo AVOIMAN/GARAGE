@@ -30,15 +30,15 @@
         {
             this.components = new System.ComponentModel.Container();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.CarBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.garageDataSet = new GARAGE.GarageDataSet();
-            this.vcarTableAdapter = new GARAGE.GarageDataSetTableAdapters.vcarTableAdapter();
             this.idcarDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.brandDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.modelDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.govnumbDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.fullnameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.phoneDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CarBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.garageDataSet = new GARAGE.GarageDataSet();
+            this.vcarTableAdapter = new GARAGE.GarageDataSetTableAdapters.vcarTableAdapter();
             this.Exit = new System.Windows.Forms.Button();
             this.DelCar = new System.Windows.Forms.Button();
             this.AddCar = new System.Windows.Forms.Button();
@@ -68,20 +68,6 @@
             this.dataGridView1.Size = new System.Drawing.Size(645, 380);
             this.dataGridView1.TabIndex = 0;
             this.dataGridView1.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellDoubleClick);
-            // 
-            // CarBindingSource
-            // 
-            this.CarBindingSource.DataMember = "vcar";
-            this.CarBindingSource.DataSource = this.garageDataSet;
-            // 
-            // garageDataSet
-            // 
-            this.garageDataSet.DataSetName = "GarageDataSet";
-            this.garageDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
-            // vcarTableAdapter
-            // 
-            this.vcarTableAdapter.ClearBeforeFill = true;
             // 
             // idcarDataGridViewTextBoxColumn
             // 
@@ -125,6 +111,20 @@
             this.phoneDataGridViewTextBoxColumn.HeaderText = "Телефон";
             this.phoneDataGridViewTextBoxColumn.Name = "phoneDataGridViewTextBoxColumn";
             this.phoneDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // CarBindingSource
+            // 
+            this.CarBindingSource.DataMember = "vcar";
+            this.CarBindingSource.DataSource = this.garageDataSet;
+            // 
+            // garageDataSet
+            // 
+            this.garageDataSet.DataSetName = "GarageDataSet";
+            this.garageDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // vcarTableAdapter
+            // 
+            this.vcarTableAdapter.ClearBeforeFill = true;
             // 
             // Exit
             // 
