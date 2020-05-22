@@ -66,7 +66,7 @@ namespace GARAGE
             {
                 // получим очередной номер
                 this.Id_car = Gar.GetNN("car");
-                _MySqlSelectCommand.CommandText = "REPLACE INTO car SET Id_car = @ID, Brand = @BRAND, Model = @MODEL, Gov_numb = @GOV, Id_customer = @CUSTOMER";
+                _MySqlSelectCommand.CommandText = "INSERT INTO car (Id_car, Brand, Model, Gov_numb, Id_customer) VALUES(@ID, @BRAND, @MODEL, @GOV, @CUSTOMER)";
 
             }
             else

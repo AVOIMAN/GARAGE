@@ -35,7 +35,7 @@ namespace GARAGE
             {
                 // получим очередной номер
                 this.Id_glass = Gar.GetNN("glass");
-                _MySqlSelectCommand.CommandText = "REPLACE INTO glass SET Id_glass = @ID, Name = @NAME, Price = @PRICE, Provider = @PROVIDER, Eurocode = @CODE";
+                _MySqlSelectCommand.CommandText = "INSERT INTO glass (Id_glass, Name, Price, Provider, Eurocode) VALUES(@ID, @NAME, @PRICE, @PROVIDER, @CODE)";
 
             }
             else

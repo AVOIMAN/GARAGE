@@ -33,7 +33,7 @@ namespace GARAGE
             {
                 // получим очередной номер
                 this.Id_service = Gar.GetNN("service");
-                _MySqlSelectCommand.CommandText = "REPLACE INTO service SET Id_service = @ID, Name = @NAME, Price = @PRICE";
+                _MySqlSelectCommand.CommandText = "INSERT INTO service (Id_service, Name, Price) VALUES(@ID, @NAME, @PRICE)";
 
             }
             else

@@ -35,7 +35,7 @@ namespace GARAGE
             {
                 // получим очередной номер
                 this.Id_client = Gar.GetNN("customer");
-                _MySqlSelectCommand.CommandText = "REPLACE INTO customer SET Id_customer = @ID, name = @NAME, lastname = @LNAME, middlename = @MNAME, phone = @PHONE";
+                _MySqlSelectCommand.CommandText = "INSERT INTO customer (Id_customer, name, lastname, middlename, phone) VALUES(@ID, @NAME, @LNAME, @MNAME, @PHONE)";
 
             }
             else

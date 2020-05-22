@@ -28,7 +28,7 @@ namespace GARAGE
             _MySqlSelectCommand = new MySqlCommand();
 
             _MySqlSelectCommand.Connection = Gar.MySqlCon;
-            _MySqlSelectCommand.CommandText = "SELECT Type FROM staff where Name = @CODE and Password = @PWD";
+            _MySqlSelectCommand.CommandText = "SELECT Type FROM staff where Login = @CODE and Password = @PWD";
             _MySqlSelectCommand.Parameters.AddWithValue("@CODE", this.UserName.Text);
             _MySqlSelectCommand.Parameters.AddWithValue("@PWD", this.Passport.Text);
 
